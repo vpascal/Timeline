@@ -3,13 +3,15 @@ google.charts.setOnLoadCallback(drawChart);
   
   function drawChart() {
 
+
     var container = document.getElementById('chart');
     var chart = new google.visualization.Timeline(container);
+
     var dataTable = new google.visualization.DataTable();
-    dataTable.addColumn({ type: 'string', id: 'Position' });
-    dataTable.addColumn({ type: 'string', id: 'Name' });
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
+    dataTable.addColumn('string', 'Position' );
+    dataTable.addColumn( 'string',  'Name' );
+    dataTable.addColumn('date',  'Start' );
+    dataTable.addColumn( 'date',  'End' );
     dataTable.addRows([
       [ '4 & 5 Grade Endorsement','E Campus', new Date(2017, 5, 15), new Date(2017, 8, 4) ],
       [ '4 & 5 Grade Endorsement','E Campus', new Date(2018, 5, 15), new Date(2018, 8, 4) ],
@@ -25,7 +27,7 @@ google.charts.setOnLoadCallback(drawChart);
      [ 'Dean\'s Compact Dual Master\'s ECE/SpEd','E Campus', new Date(2017, 8, 15), new Date(2022, 5, 1) ],
       [ 'Reading Endorsement ','E Campus', new Date(2017, 5, 15), new Date(2017, 8, 4) ],
       [ 'Reading Endorsement ','E Campus', new Date(2018, 5, 15), new Date(2018, 8, 4) ],
-      [ 'Reading Endorsement ', 'E Campus', new Date(2019, 5, 15), new Date(2019, 8, 4) ],
+      [ 'Reading Endorsement ', 'E Campus', new Date(2019, 5, 15), new Date(2019, 8, 4) ]
 
 
     ]);

@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the controls package.
+      google.charts.load('current', {'packages':['controls','timeline']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawDashboard);
+
+      // Callback that creates and populates a data table,
+      // instantiates a dashboard, a range slider and a pie chart,
+      // passes in the data and draws it.
+      function drawDashboard() {
+
+        // Create our data table.
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Department' );
+    dataTable.addColumn('string', 'Program' );
+    dataTable.addColumn( 'string',  'Campus' );
+    dataTable.addColumn('date',  'Start' );
+    dataTable.addColumn( 'date',  'End' );
+    dataTable.addRows([
+      [ 'Teacher Education','4 & 5 Grade Endorsement','E Campus', new Date(2017, 5, 15), new Date(2017, 8, 4) ],
+      [ 'Teacher Education','4 & 5 Grade Endorsement','E Campus', new Date(2018, 5, 15), new Date(2018, 8, 4) ],
+      [ 'Teacher Education','4 & 5 Grade Endorsement', 'E Campus', new Date(2019, 5, 15), new Date(2019, 8, 4) ],
+
+      [ 'Teacher Education','Special Edu Masters Cohort','Southern', new Date(2016, 8, 15), new Date(2017, 8, 4) ],
+      [ 'Teacher Education','Special Edu Masters Cohort','Zanesville', new Date(2017, 8, 15), new Date(2019, 5, 1) ],
+      [ 'Teacher Education','Special Edu Masters Cohort','Lancaster', new Date(2019, 8, 15), new Date(2021, 5, 1) ],
+
+     [ 'Teacher Education','Transition to Work Certificate','E Campus', new Date(2018, 8, 15), new Date(2021, 8, 4) ],
+     [ 'Teacher Education','Pre-K Special Needs Endorsement','E Campus', new Date(2017, 8, 15), new Date(2021, 5, 1) ],
+     [ 'Teacher Education','Dean\'s Compact Dual Master\'s ECE/SpEd','E Campus', new Date(2017, 8, 15), new Date(2022, 5, 1) ],
+     
+      [ 'Teacher Education','Reading Endorsement ','E Campus', new Date(2017, 5, 15), new Date(2017, 8, 4) ],
+      [ 'Teacher Education','Reading Endorsement ','E Campus', new Date(2018, 5, 15), new Date(2018, 8, 4) ],
+      [ 'Teacher Education','Reading Endorsement ', 'E Campus', new Date(2019, 5, 15), new Date(2019, 8, 4) ],
+
+      [ 'Educational Studies','Principal','Chillicothe', new Date(2016, 8, 15), new Date(2018, 5, 1) ],
+      [ 'Educational Studies','Principal','Chillicothe', new Date(2018, 8, 15), new Date(2020, 5, 1) ], 
+      [ 'Educational Studies','Principal','Chillicothe', new Date(2020, 8, 15), new Date(2022, 5, 1) ],
+
+      [ 'Educational Studies','Superintendent','Pickerington', new Date(2016, 8, 15), new Date(2018, 5, 1) ],
+      [ 'Educational Studies','Superintendent','Pickerington', new Date(2018, 8, 15), new Date(2020, 5, 1) ], 
+      [ 'Educational Studies','Superintendent','Pickerington', new Date(2020, 8, 15), new Date(2022, 5, 1) ],
+
+      [ 'Educational Studies','Education Policy Certificate','E Campus', new Date(2018, 8, 15), new Date(2019, 5, 1) ],
+      [ 'Educational Studies','Education Policy Certificate','E Campus', new Date(2019, 8, 15), new Date(2020, 5, 1) ], 
+      [ 'Educational Studies','Education Policy Certificate','E Campus', new Date(2020, 8, 15), new Date(2021, 5, 1) ]
+
+    ]);
+
+
+        // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+        // Create a range slider, passing some options
+        var campusdropdown = new google.visualization.ControlWrapper({
+          'controlType': 'CategoryFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnLabel': 'Department',
+            'ui': {caption:'Select Department'}
+             }
+
+        });
+
+        var mytimeline = new google.visualization.ChartWrapper({
+          'chartType': 'Timeline',
+          'containerId': 'chart_div',
+          'view': {columns:[1,2,3,4]}
+        
+        });
+
+
+        // Establish dependencies, declaring that 'filter' drives 'pieChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+
+        dashboard.bind(campusdropdown, mytimeline);
+
+        // Draw the dashboard.
+        dashboard.draw(dataTable);
+}
+
+
+
+      
+
+
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      <div id="filter_div" style="height: 50px;"></div>
+      <div id="chart_div" style="height: 550px;"></div>
+    </div>
+  </body>
+</html>

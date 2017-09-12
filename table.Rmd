@@ -1,10 +1,22 @@
 ---
-title: "Table"
-author: "Vlad Pascal"
-date: "September 12, 2017"
+title: "Outreach Program Cohort Schedules"
 output: html_document
 ---
+
+<br>
+<br>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r, echo=FALSE}
+library(readxl)
+library(DT)
+
+timeline <-read_xlsx("Outreach Program Cohort Schedules- Revised.xlsx",sheet = "Sheet2") 
+datatable(timeline,extensions = c('Buttons', 'Responsive'), options = list(dom = 'Bfrtip',
+buttons = c('excel', 'pdf', 'print')))
+
+```
+
